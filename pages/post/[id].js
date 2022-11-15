@@ -13,7 +13,7 @@ export default PostItem
 
 export async function getStaticPaths()
 {
-    const data = await fetch('http://localhost:3000/api/posts')
+    const data = await fetch('https://jsonplaceholder.typicode.com/posts/')
     const res = await data.json()
     return {
         paths: res.map(p => ({
@@ -26,7 +26,7 @@ export async function getStaticPaths()
 export async function getStaticProps(context)
 {
     const {id} = context.params
-    const data = await fetch(`http://localhost:3000/api/posts/${id}`)
+    const data = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
     if(!data)
     {
         return{

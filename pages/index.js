@@ -40,7 +40,7 @@ export default function Home({posts}) {
 export async function getStaticProps()
 {
     
-    const data  = await fetch('http://localhost:3000/api/posts')
+    const data  = await fetch('https://jsonplaceholder.typicode.com/posts/')
     if(!data)
     {
       return {

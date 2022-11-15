@@ -19,7 +19,7 @@ export async function getStaticPaths()
         paths: res.map(p => ({
             params: {id: p.id.toString()}
         })),
-        fallback:false
+        fallback:false //false=if not found=404 page,true=wait new data from server and add to other html build,blocking=until finished fetch new data the page persists
     }
 }
 
@@ -37,6 +37,7 @@ export async function getStaticProps(context)
     return{
         props:{
             post:json
-        }
+        },
+        revalidate:10 //revalidate the props for given 10 seconds
     }
 }

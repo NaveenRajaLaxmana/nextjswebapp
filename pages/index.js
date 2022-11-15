@@ -1,9 +1,15 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
-export default function Home({posts}) {
+export default function Home() {
   const router = useRouter()
+  const [posts,setPosts] = useState([]);
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/posts/').then(res => res.json()).then(data => setPosts(data))
+  },[])
 
   const Post = ({data:{userId,id,title}}) => {
 
@@ -36,22 +42,3 @@ export default function Home({posts}) {
   )
 }
 
-
-export async function getStaticProps()
-{
-    
-    const data  = await fetch('https://jsonplaceholder.typicode.com/posts/')
-    if(!data)
-    {
-      return {
-        notFound:true
-      }
-    }
-    const json = await data.json()
-
-    return{
-      props:{
-        posts:json
-      }
-    }
-}

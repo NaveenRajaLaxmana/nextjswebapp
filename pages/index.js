@@ -37,11 +37,11 @@ export default function Home({posts}) {
 }
 
 
-export async function getStaticProps()
+export async function getServerSideProps()
 {
     
     const data  = await fetch('https://jsonplaceholder.typicode.com/posts/')
-    if(!data)
+    if(data.status!=200)
     {
       return {
         notFound:true
